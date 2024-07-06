@@ -1,4 +1,9 @@
-import { Form, useNavigate, useNavigation } from 'react-router-dom';
+import {
+  Form,
+  useNavigate,
+  useNavigation,
+  useActionData,
+} from 'react-router-dom';
 
 //Form this special form component offered by react 
 //this form will automatically triger the action function - in pages/NewEvent.js - of the currently active route
@@ -9,8 +14,8 @@ import { Form, useNavigate, useNavigation } from 'react-router-dom';
 
 
 import classes from './EventForm.module.css';
-
 function EventForm({ method, event }) {
+  const data = useActionData();
   const navigate = useNavigate();
   const navigation = useNavigation();
 
@@ -22,6 +27,14 @@ function EventForm({ method, event }) {
 
   return (
     <Form method="post" className={classes.form}>
+      {data && data.errors && (
+        <ul>
+          {Object.values(data.errors).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
+      
       <p>
         <label htmlFor="title">Title</label>
         <input
