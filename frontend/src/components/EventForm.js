@@ -1,4 +1,4 @@
-import { useNavigate, Form } from 'react-router-dom';
+import { Form, useNavigate, useNavigation } from 'react-router-dom';
 
 //Form this special form component offered by react 
 //this form will automatically triger the action function - in pages/NewEvent.js - of the currently active route
@@ -7,16 +7,21 @@ import { useNavigate, Form } from 'react-router-dom';
 // action='//path' : <Form method='post' action='//path' className={classes.form}>
 
 
+
 import classes from './EventForm.module.css';
 
 function EventForm({ method, event }) {
   const navigate = useNavigate();
+  const navigation = useNavigation();
+
+  const isSubmitting = navigation.state === 'submitting';
+
   function cancelHandler() {
     navigate('..');
   }
 
   return (
-    <Form method='post' className={classes.form}>
+    <Form method="post" className={classes.form}>
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -58,10 +63,12 @@ function EventForm({ method, event }) {
         />
       </p>
       <div className={classes.actions}>
-        <button type="button" onClick={cancelHandler}>
+        <button type="button" onClick={cancelHandler} disabled={isSubmitting}>
           Cancel
         </button>
-        <button>Save</button>
+        <button disabled={isSubmitting}>
+          {isSubmitting ? 'Submitting...' : 'Save'}
+        </button>
       </div>
     </Form>
   );
