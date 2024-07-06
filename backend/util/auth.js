@@ -2,7 +2,7 @@ const { sign, verify } = require('jsonwebtoken');
 const { compare } = require('bcryptjs');
 const { NotAuthError } = require('./errors');
 
-const KEY = 'supersecret';//dummy be must be stored in ini file
+const KEY = 'supersecret';
 
 function createJSONToken(email) {
   return sign({ email }, KEY, { expiresIn: '1h' });
