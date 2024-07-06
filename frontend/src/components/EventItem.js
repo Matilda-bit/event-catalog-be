@@ -1,10 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useSubmit } from 'react-router-dom';
 
 import classes from './EventItem.module.css';
 
 function EventItem({ event }) {
+  const submit = useSubmit();
+
   function startDeleteHandler() {
-    // ...
+
+    const proceed = window.confirm('Are you sure?');//browser build func
+
+    if (proceed) {
+      submit(null, { method: 'delete' });//trigger action from app.js by react hooks useSubmit()
+      //you could add different route if needed : submit(null, { method: 'delete', action: '/path' });
+      //pass the needed method as method: request.method, in pages/EventDetail.js
+    }
   }
 
   return (

@@ -1,5 +1,12 @@
 import { useNavigate, Form } from 'react-router-dom';
 
+//Form this special form component offered by react 
+//this form will automatically triger the action function - in pages/NewEvent.js - of the currently active route
+//You could send the request to a different route,
+//by addin the action prop to Form component
+// action='//path' : <Form method='post' action='//path' className={classes.form}>
+
+
 import classes from './EventForm.module.css';
 
 function EventForm({ method, event }) {
