@@ -6,13 +6,10 @@ function EventItem({ event }) {
   const submit = useSubmit();
 
   function startDeleteHandler() {
-
-    const proceed = window.confirm('Are you sure?');//browser build func
+    const proceed = window.confirm('Are you sure?');
 
     if (proceed) {
-      submit(null, { method: 'delete' });//trigger action from app.js by react hooks useSubmit()
-      //you could add different route if needed : submit(null, { method: 'delete', action: '/path' });
-      //pass the needed method as method: request.method, in pages/EventDetail.js
+      submit(null, { method: 'delete' });
     }
   }
 

@@ -7,16 +7,7 @@ import {
   redirect
 } from 'react-router-dom';
 
-//Form this special form component offered by react 
-//this form will automatically triger the action function - in pages/NewEvent.js - of the currently active route
-//You could send the request to a different route,
-//by addin the action prop to Form component
-// action='//path' : <Form method='post' action='//path' className={classes.form}>
-
-
-//action func moved to here for reusing via different request methods
-
-
+import { getAuthToken } from '../util/auth';
 import classes from './EventForm.module.css';
 
 function EventForm({ method, event }) {
@@ -111,10 +102,12 @@ export async function action({ request, params }) {
     url = 'http://localhost:8080/events/' + eventId;
   }
 
+  const token = getAuthToken();
   const response = await fetch(url, {
     method: method,
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
     },
     body: JSON.stringify(eventData),
   });
