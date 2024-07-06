@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 
 const eventRoutes = require('./routes/events');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
